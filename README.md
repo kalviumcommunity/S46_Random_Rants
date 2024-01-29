@@ -12,7 +12,7 @@ Create a space to share random thoughts about a topic.
 
 ### Upvote the madness
 
-Let your voice be heard! You can upvote any random thought you like.
+Let your voice be heard!. You can upvote any random thought you like.
 
 ### Anonymous
 
