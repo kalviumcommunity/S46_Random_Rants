@@ -1,0 +1,11 @@
+{
+  "name": "random-rants",
+  "version": "1.0.0",
+  "description": "Create your own list of random thoughts. It can be anything literally from silly or funny to pondering about meaning of life, limited only by your randomness!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anam Ashraf",
+  "license": "ISC"
+}
