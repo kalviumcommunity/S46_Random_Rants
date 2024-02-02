@@ -2,7 +2,6 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require("express")
 const app = express()
-const port = 3000
 let connectionStatus = "disconnected"
 
 const connectDB = async () => {
@@ -30,7 +29,7 @@ app.get("/", (req,res) => {
     res.send(connectionStatus)
 })
 
-app.listen(port, () => {
+app.listen(process.env.PORT, () => {
     console.log("Server running...")
 })
 
