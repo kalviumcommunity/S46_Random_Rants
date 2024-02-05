@@ -29,11 +29,23 @@ app.get("/", (req,res) => {
     res.send(connectionStatus)
 })
 
+app.get("/ping", (req,res) => {
+    res.send("pong")
+})
+
+app.post("/create",(req,res) => {
+    res.status(201).json({"message":"post request successful"})
+})
+
+app.put("/update",(req,res) => {
+    res.status(200).json({"message":"put request successful"})
+})
+
+app.delete("/remove",(req,res) => {
+    res.status(200).json({"message":"delete request successful"})
+})
+
 app.listen(process.env.PORT, () => {
     console.log("Server running...")
 })
 
-
-app.get("/ping", (req,res) => {
-    res.send("pong")
-})
