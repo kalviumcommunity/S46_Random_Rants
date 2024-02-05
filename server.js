@@ -1,17 +1,20 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require("express")
+const { route } = require('./routes')
+const routes = require('./routes')
 const app = express()
 let connectionStatus = "disconnected"
 
 const connectDB = async () => {
     try{
-        await mongoose.connect(process.env.DATABASE_URI)
+        await mongoose.connect(`${process.env.DATABASE_URI}`)
         connectionStatus = "Connected"
     } catch(err) {
         connectionStatus = "Failed"
         console.error(err)
     }
+    console.log(connectionStatus)
 } 
 
 connectDB()
@@ -25,25 +28,7 @@ const disconnectDB = async () => {
     }
 }
 
-app.get("/", (req,res) => {
-    res.send(connectionStatus)
-})
-
-app.get("/ping", (req,res) => {
-    res.send("pong")
-})
-
-app.post("/create",(req,res) => {
-    res.status(201).json({"message":"post request successful"})
-})
-
-app.put("/update",(req,res) => {
-    res.status(200).json({"message":"put request successful"})
-})
-
-app.delete("/remove",(req,res) => {
-    res.status(200).json({"message":"delete request successful"})
-})
+app.use("/", routes)
 
 app.listen(process.env.PORT, () => {
     console.log("Server running...")
