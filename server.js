@@ -8,7 +8,7 @@ let connectionStatus = "disconnected"
 
 const connectDB = async () => {
     try{
-        await mongoose.connect(`${process.env.DATABASE_URI}`)
+        await mongoose.connect(process.env.DATABASE_URI)
         connectionStatus = "Connected"
     } catch(err) {
         connectionStatus = "Failed"
