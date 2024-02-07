@@ -1,24 +1,17 @@
 const express = require("express")
 const router = express.Router()
+const {getAllItems,createItem,updateItem,deleteItem} = require("./CRUDController")
+
+router.get("/:model", getAllItems)
 
 router.get("/", (req,res) => {
-    res.send(connectionStatus)
+    res.send("Welcome to Random Rants")
 })
 
-router.get("/ping", (req,res) => {
-    res.send("pong")
-})
+router.post("/:model/create",createItem)
 
-router.post("/create",(req,res) => {
-    res.status(201).json({"message":"post request successful"})
-})
+router.put("/:model/update/:id",updateItem)
 
-router.put("/update",(req,res) => {
-    res.status(200).json({"message":"put request successful"})
-})
-
-router.delete("/remove",(req,res) => {
-    res.status(200).json({"message":"delete request successful"})
-})
+router.delete("/:model/remove/:id",deleteItem)
 
 module.exports = router

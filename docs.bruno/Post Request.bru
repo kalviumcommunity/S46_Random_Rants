@@ -5,7 +5,16 @@ meta {
 }
 
 post {
-  url: https://random-rants.onrender.com/create
-  body: none
+  url: http://localhost:3000/user/create
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "username": "Rock Lee",
+    "email": "rocklee@gmail.com",
+    "password": "rocklee@123",
+    "userId": "lee@123"
+  }
 }

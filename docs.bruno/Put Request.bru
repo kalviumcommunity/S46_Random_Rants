@@ -5,7 +5,16 @@ meta {
 }
 
 put {
-  url: https://random-rants.onrender.com/update
-  body: none
+  url: http://localhost:3000/user/update/65c36679ccf6d9647d4b963a
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "username": "Rock Lee",
+    "email": "rocklee@gmail.com",
+    "password": "gengutsu*8",
+    "userId": "lee@123"
+  }
 }

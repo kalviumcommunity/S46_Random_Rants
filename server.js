@@ -5,7 +5,7 @@ const { route } = require('./routes')
 const routes = require('./routes')
 const app = express()
 let connectionStatus = "disconnected"
-
+app.use(express.json())
 const connectDB = async () => {
     try{
         await mongoose.connect(process.env.DATABASE_URI)
