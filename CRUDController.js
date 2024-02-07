@@ -13,6 +13,8 @@ const getAllItems = async (req,res) => {
             console.error(err)
             res.status(500).json({error:"Error fetching items",err})
         }
+    } else {
+        res.status(404).json({message:"Model not found"})
     }
 
 }
@@ -31,6 +33,8 @@ const createItem = async (req,res) => {
             console.error(err)
             res.status(500).json({error:"Error fetching items",err})
         }
+    }else {
+        res.status(404).json({message:"Model not found"})
     }
 } 
 
@@ -39,17 +43,22 @@ const updateItem = async (req,res) => {
     const modelName = req.params.model
     const Model = require(`./models/${modelName}`) 
 
-    try{
-        const itemId = req.params.id
-        const updatedItem = await Model.findByIdAndUpdate(itemId,req.body,{new:true})
-        if(!updatedItem){
-            return res.status(404).json({message: "Item not found"})
+    if (Model) {
+        try{
+            const itemId = req.params.id
+            const updatedItem = await Model.findByIdAndUpdate(itemId,req.body,{new:true})
+            if(!updatedItem){
+                return res.status(404).json({message: "Item not found"})
+            }
+            res.json(updatedItem)
+        } catch(err) {
+            console.error(err)
+            res.status(500).json({error: "Error  updating item", err})
         }
-        res.json(updatedItem)
-    } catch(err) {
-        console.error(err)
-        res.status(500).json({error: "Error  updating item", err})
+    }else {
+        res.status(404).json({message:"Model not found"})
     }
+
 }
 
 const deleteItem = async (req,res) => {
@@ -57,18 +66,25 @@ const deleteItem = async (req,res) => {
     const modelName = req.params.model
     const Model = require(`./models/${modelName}`) 
 
-    try {
-        const itemId = req.params.id
-        const deletedItem = await Model.findByIdAndDelete(itemId)
-        if(!deletedItem){
-            return res.status(404).json({message:"Item not found"})
+    if (Model) {
+        try {
+            const itemId = req.params.id
+            const deletedItem = await Model.findByIdAndDelete(itemId)
+            if(!deletedItem){
+                return res.status(404).json({message:"Item not found"})
+            }
+            res.json({message:"Item deleted successfully"})
+        } catch(err){
+            console.error(err)
+            res.status(500).json({message: "Error deleting"})
         }
-        res.json({message:"Item deleted successfully"})
-    } catch(err){
-        console.error(err)
-        res.status(500).json({message: "Error deleting"})
+    }else {
+        res.status(404).json({message:"Model not found"})
     }
+
 }
+
+
 
 module.exports = {
     getAllItems,
