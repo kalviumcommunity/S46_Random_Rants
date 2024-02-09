@@ -1,12 +1,17 @@
 
 import './App.css'
+import Feed from './components/Feed'
 import Hero from './components/Hero'
+
 
 function App() {
 
   return (
     <>
-     <Hero/>
+    <div className='font-poppins'>
+      <Hero/>
+      <Feed/>
+    </div>
     </>
   )
 }

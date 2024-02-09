@@ -11,6 +11,9 @@ export default {
         poppins: ['Poppins', "sans-serif"],
         playfair: ['Playfair Display', "serif"],
         hand: ['Delicious Handrawn', "cursive"]
+      },
+      backgroundImage: {
+        "banner" : "url(./src/assets/banner.jpg)"
       }
     },
   },

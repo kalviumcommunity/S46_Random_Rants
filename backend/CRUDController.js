@@ -1,9 +1,13 @@
 
+function detectModel(reqModel){
+    const modelName = reqModel
+    const Model = require(`./models/${modelName}`) 
+    return Model
+}
 
 const getAllItems = async (req,res) => {
 
-    const modelName = req.params.model
-    const Model = require(`./models/${modelName}`) 
+    const Model = detectModel(req.params.model)
 
     if (Model){
         try{
@@ -21,8 +25,7 @@ const getAllItems = async (req,res) => {
 
 const createItem = async (req,res) => {
 
-    const modelName = req.params.model
-    const Model = require(`./models/${modelName}`) 
+    const Model = detectModel(req.params.model)
 
     if (Model){
         try{
@@ -40,8 +43,7 @@ const createItem = async (req,res) => {
 
 const updateItem = async (req,res) => {
 
-    const modelName = req.params.model
-    const Model = require(`./models/${modelName}`) 
+    const Model = detectModel(req.params.model)
 
     if (Model) {
         try{
@@ -63,8 +65,7 @@ const updateItem = async (req,res) => {
 
 const deleteItem = async (req,res) => {
 
-    const modelName = req.params.model
-    const Model = require(`./models/${modelName}`) 
+    const Model = detectModel(req.params.model)
 
     if (Model) {
         try {
