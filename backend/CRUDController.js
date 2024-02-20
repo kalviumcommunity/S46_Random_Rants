@@ -8,10 +8,11 @@ function detectModel(reqModel){
 const getAllItems = async (req,res) => {
 
     const Model = detectModel(req.params.model)
-
+    console.log(Model)
     if (Model){
         try{
             const items = await Model.find()
+            console.log(items)
             res.send(items)
         }catch(err) {
             console.error(err)
