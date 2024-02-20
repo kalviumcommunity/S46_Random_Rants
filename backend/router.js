@@ -5,8 +5,16 @@ const newUser = require("./models/user");
 
 // router.get("/:model/get", getAllItems)
 
-router.get("/", (req,res) => {
-    res.send("Welcome to Random Rants")
+router.get("/", async (req,res) => {
+    // res.send("Welcome to Random Rants")
+    try{
+        const items = await newUser.find()
+        console.log(items)
+        res.send(items)
+    }catch(err){
+        console.err(err)
+        res.status(500).json({error:"Error fetching items",err})
+    }
 })
 
 router.get("/user",async (req,res) => {
