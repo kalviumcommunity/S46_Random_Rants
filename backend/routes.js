@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const {getAllItems,createItem,updateItem,deleteItem} = require("./CRUDController")
+const UserModel = require("./models/user");
 
 // router.get("/:model/get", getAllItems)
 
@@ -9,9 +10,8 @@ router.get("/", (req,res) => {
 })
 
 router.get("/user",async (req,res) => {
-    const Model = require("./models/user");
     try{
-        const items = await Model.find()
+        const items = await UserModel.find()
         res.send(items)
     }catch(err){
         console.err(err)
