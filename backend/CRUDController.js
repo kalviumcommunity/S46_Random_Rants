@@ -12,7 +12,7 @@ const getAllItems = async (req,res) => {
     if (Model){
         try{
             const items = await Model.find()
-            res.json(items)
+            res.send(items)
         }catch(err) {
             console.error(err)
             res.status(500).json({error:"Error fetching items",err})
