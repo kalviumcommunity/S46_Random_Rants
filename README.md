@@ -1,8 +1,19 @@
-# React + Vite
+# Random Rants
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Create your own list of random thoughts. It can be anything literally from silly or funny to pondering about meaning of life, limited only by your randomness!
 
-Currently, two official plugins are available:
+Let's see how much the mind can babble.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+
+### Find your people among the babbling minds
+
+Create a space to share random thoughts about a topic.
+
+### Upvote the madness
+
+Let your voice be heard! You can upvote any random thought you like.
+
+### Anonymous
+
+Express yourself freely without revealing your identity. Your username? Pure random gibberish, of course!
