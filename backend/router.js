@@ -1,35 +1,11 @@
 const express = require("express")
 const router = express.Router()
 const {getAllItems,createItem,updateItem,deleteItem} = require("./CRUDController")
-const newUser = require("./models/user");
 
-// router.get("/:model/get", getAllItems)
+router.get("/:model", getAllItems)
 
-router.get("/", async (req,res) => {
-    // res.send("Welcome to Random Rants")
-    try{
-        const items = await newUser.find()
-        console.log(items)
-        res.send(items)
-    }catch(err){
-        console.err(err)
-        res.status(500).json({error:"Error fetching items",err})
-    }
-})
-
-router.get("/list",(req,res) => {
-    res.send("Hello")
-})
-
-router.get("/user",async (req,res) => {
-    try{
-        const items = await newUser.find()
-        console.log(items)
-        res.send(items)
-    }catch(err){
-        console.err(err)
-        res.status(500).json({error:"Error fetching items",err})
-    }
+router.get("/", (req,res) => {
+    res.send("Welcome to Random Rants")
 })
 
 router.post("/:model/create",createItem)

@@ -1,19 +1,14 @@
 
-function detectModel(reqModel){
-    const modelName = reqModel
-    const Model = require(`./models/${modelName}`) 
-    return Model
-}
 
 const getAllItems = async (req,res) => {
 
-    const Model = detectModel(req.params.model)
-    console.log(Model)
+    const modelName = req.params.model
+    const Model = require(`./models/${modelName}`) 
+
     if (Model){
         try{
             const items = await Model.find()
-            console.log(items)
-            res.send(items)
+            res.json(items)
         }catch(err) {
             console.error(err)
             res.status(500).json({error:"Error fetching items",err})
@@ -26,7 +21,8 @@ const getAllItems = async (req,res) => {
 
 const createItem = async (req,res) => {
 
-    const Model = detectModel(req.params.model)
+    const modelName = req.params.model
+    const Model = require(`./models/${modelName}`) 
 
     if (Model){
         try{
@@ -44,7 +40,8 @@ const createItem = async (req,res) => {
 
 const updateItem = async (req,res) => {
 
-    const Model = detectModel(req.params.model)
+    const modelName = req.params.model
+    const Model = require(`./models/${modelName}`) 
 
     if (Model) {
         try{
@@ -66,7 +63,8 @@ const updateItem = async (req,res) => {
 
 const deleteItem = async (req,res) => {
 
-    const Model = detectModel(req.params.model)
+    const modelName = req.params.model
+    const Model = require(`./models/${modelName}`) 
 
     if (Model) {
         try {
