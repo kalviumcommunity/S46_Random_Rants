@@ -6,7 +6,7 @@ const app = express()
 let connectionStatus = "disconnected"
 app.use(express.json())
 
-app.use("/", router)
+app.use("/random", router)
 
 const connectDB = async () => {
     try{

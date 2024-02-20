@@ -17,6 +17,10 @@ router.get("/", async (req,res) => {
     }
 })
 
+router.get("/list",(req,res) => {
+    res.send("Hello")
+})
+
 router.get("/user",async (req,res) => {
     try{
         const items = await newUser.find()
