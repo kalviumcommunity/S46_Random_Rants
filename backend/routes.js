@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const {getAllItems,createItem,updateItem,deleteItem} = require("./CRUDController")
 
-router.get("/:model", getAllItems)
+router.get("/:model/get", getAllItems)
 
 router.get("/", (req,res) => {
     res.send("Welcome to Random Rants")
