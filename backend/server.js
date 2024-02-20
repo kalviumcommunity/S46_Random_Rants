@@ -1,11 +1,13 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require("express")
-const { route } = require('./routes')
-const routes = require('./routes')
+const router = require('./router')
 const app = express()
 let connectionStatus = "disconnected"
 app.use(express.json())
+
+app.use("/", router)
+
 const connectDB = async () => {
     try{
         await mongoose.connect(process.env.DATABASE_URI)
@@ -28,7 +30,6 @@ const disconnectDB = async () => {
     }
 }
 
-app.use("/", routes)
 
 app.listen(process.env.PORT, () => {
     console.log("Server running...")
