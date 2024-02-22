@@ -25,7 +25,7 @@ export default function Hero() {
             </div>
         </div>
         <div>
-            <img className="h-screen w-[70dvw] hidden lg:block" src={banner} alt="image of thoughts being untangled" />
+            <img className="h-screen w-[80dvw] hidden lg:block" src={banner} alt="image of thoughts being untangled" />
         </div>
         <img src={arrow} onClick={handleScroll} className="hidden lg:block absolute bottom-2 size-20 left-[47%] cursor-pointer animate-bounce" alt="arrow-down" />
     </div>

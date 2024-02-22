@@ -2,7 +2,7 @@
 import './App.css'
 import {BrowserRouter,Routes,Route} from "react-router-dom"
 import Hero from './components/Hero'
-
+import Feed from './components/Feed'
 
 function App() {
 

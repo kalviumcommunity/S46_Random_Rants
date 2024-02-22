@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import FixedNav from "./FixedNav";
 import axios from "axios"
  
  export default function Feed() {
@@ -24,7 +25,7 @@ import axios from "axios"
 
    return (
     <>
-    
+    <FixedNav/>
     <div id="feed" className="flex flex-col justify-center items-center h-full bg-slate-100 p-10">
      <h1 className="self-center p-10 text-5xl font-bold">Feed</h1>
             {thought && thought.map(thought => {
