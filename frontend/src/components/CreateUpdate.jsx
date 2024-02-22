@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import Navbar from "./Navbar";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { useNavigate,useParams } from "react-router";
 
 const initialValues = {
     tag: "",
@@ -11,17 +11,27 @@ const initialValues = {
 export default function Create() {
 
     const navigate = useNavigate()
+    const {operation,id} = useParams()
 
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
-          axios.post("http://localhost:3000/thought/create",values)
-            .then(res => {
+        if(operation === "create"){
+            axios.post("http://localhost:3000/thought/create",values)
+              .then(res => {
                 console.log(res)
                 navigate("/")
-            })
-            .catch(err => console.error(err))
-        },
+              })
+              .catch(err => console.error(err))
+          }else{
+            axios.put(`http://localhost:3000/thought/update/${id}`,values)
+                .then(res => {
+                    console.log(res)
+                    navigate("/")
+                })
+                .catch(err => console.error(err))
+            }
+        }
       });
 
 
@@ -53,7 +63,7 @@ export default function Create() {
             <button
                 type="submit"
                 className="border-2 py-3 my-3 lg:w-1/2 lg:my-10 w-full bg-orange-300 hover:bg-orange-400 rounded-md text-white">
-                Untangle
+                {operation === "create" ? "Untangle" : "Update"}
             </button>
             </form>
     </div>
