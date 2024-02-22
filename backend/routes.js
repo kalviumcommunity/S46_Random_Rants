@@ -3,12 +3,6 @@ const thoughtModel = require("./models/thought")
 const userModel = require("./models/user")
 const router = express.Router()
 
-function detectModel(reqModel){
-    const modelName = reqModel
-    const Model = require(`./models/${modelName}`) 
-    return Model
-}
-
 function createModelRoutes(modelName,Model){
 
     router.get(`/${modelName}/get`,async (req,res) => {
