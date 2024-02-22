@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import FixedNav from "./FixedNav";
+import { Link } from "react-router-dom";
 import axios from "axios"
  
  export default function Feed() {
@@ -53,9 +54,14 @@ import axios from "axios"
     </div>
     {isVisible ? <div className="hidden lg:flex flex-col items-center border-2 bg-white fixed top-20 right-10 p-10 gap-5 text-white">
         <p className="text-black text-2xl">New to random Rants?</p>
-        <div className="flex gap-5">
+        <div className="flex flex-col items-center gap-5">
+            <div className="flex gap-5">
                 <button className="border-2 w-32 py-3 rounded-3xl bg-red-400">Sign Up</button>
                 <button className="border-2 w-32 py-3 rounded-3xl bg-red-400">Log In</button>
+            </div>
+            <Link to="/create">
+                <button className="border-2 w-32 py-3 rounded-3xl bg-red-400">Add thought</button>
+            </Link>
         </div>
     </div>: null}
     </>

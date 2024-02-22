@@ -2,11 +2,11 @@
 const mongoose = require("mongoose")
 
 const thoughtSchema = new mongoose.Schema({
-    userId: {
+    tag: {
         type: String,
         required: true
     },
-    content: {
+    thought: {
         type: String,
         required: true
     }
