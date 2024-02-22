@@ -1,4 +1,6 @@
 const express = require("express")
+const thoughtModel = require("./models/thought")
+const userModel = require("./models/user")
 const router = express.Router()
 
 function detectModel(reqModel){
@@ -7,11 +9,10 @@ function detectModel(reqModel){
     return Model
 }
 
-router.get("/:model", async (req,res) => {
+function createModelRoutes(modelName,Model){
 
-    const Model = detectModel(req.params.model)
+    router.get(`/${modelName}/get`,async (req,res) => {
 
-    if (Model){
         try{
             const items = await Model.find()
             res.json(items)
@@ -19,17 +20,11 @@ router.get("/:model", async (req,res) => {
             console.error(err)
             res.status(500).json({error:"Error fetching items",err})
         }
-    } else {
-        res.status(404).json({message:"Model not found"})
-    }
     
-})
+    })
 
-router.get("/:model/:id", async (req,res) => {
+    router.get(`/${modelName}/get/:id`,async (req,res) => {
 
-    const Model = detectModel(req.params.model)
-
-    if (Model){
         try{
             const itemId = req.params.id
             const items = await Model.findById(itemId)
@@ -38,21 +33,11 @@ router.get("/:model/:id", async (req,res) => {
             console.error(err)
             res.status(500).json({error:"Error fetching items",err})
         }
-    } else {
-        res.status(404).json({message:"Model not found"})
-    }
     
-})
+    })
 
-router.get("/", (req,res) => {
-    res.send("Welcome to Random Rants")
-})
-
-router.post("/:model/create",async (req,res) => {
-
-    const Model = detectModel(req.params.model)
-
-    if (Model){
+    router.post(`/${modelName}/create`,async (req,res) => {
+    
         try{
             const items = new Model(req.body)
             await items.save()
@@ -61,17 +46,11 @@ router.post("/:model/create",async (req,res) => {
             console.error(err)
             res.status(500).json({error:"Error fetching items",err})
         }
-    }else {
-        res.status(404).json({message:"Model not found"})
-    }
-    
-})
+        
+    })
 
-router.put("/:model/update/:id",async (req,res) => {
+    router.put(`/${modelName}/update/:id`,async (req,res) => {
 
-    const Model = detectModel(req.params.model)
-
-    if (Model) {
         try{
             const itemId = req.params.id
             const updatedItem = await Model.findByIdAndUpdate(itemId,req.body,{new:true})
@@ -83,17 +62,11 @@ router.put("/:model/update/:id",async (req,res) => {
             console.error(err)
             res.status(500).json({error: "Error  updating item", err})
         }
-    }else {
-        res.status(404).json({message:"Model not found"})
-    }
 
-})
+    })
 
-router.delete("/:model/remove/:id",async (req,res) => {
+    router.delete(`/${modelName}/remove/:id`,async(req,res) => {
 
-    const Model = detectModel(req.params.model)
-
-    if (Model) {
         try {
             const itemId = req.params.id
             const deletedItem = await Model.findByIdAndDelete(itemId)
@@ -105,10 +78,12 @@ router.delete("/:model/remove/:id",async (req,res) => {
             console.error(err)
             res.status(500).json({message: "Error deleting"})
         }
-    }else {
-        res.status(404).json({message:"Model not found"})
-    }
 
-})
+    })
+
+}
+
+createModelRoutes("user",userModel)
+createModelRoutes("thought",thoughtModel)
 
 module.exports = router
