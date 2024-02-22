@@ -1,8 +1,12 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require("express")
+<<<<<<< HEAD
 const router = require('./routes')
 const cors = require("cors")
+=======
+const routes = require('./routes')
+>>>>>>> main
 const app = express()
 let connectionStatus = "disconnected"
 app.use(express.json())
