@@ -17,3 +17,6 @@ Let your voice be heard! You can upvote any random thought you like.
 ### Anonymous
 
 Express yourself freely without revealing your identity. Your username? Pure random gibberish, of course!
+
+Deployed Link[Front-end]: https://randomrants.netlify.app
+Deployed Link[Back-end]: https://random-rants.onrender.com
