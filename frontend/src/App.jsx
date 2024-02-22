@@ -2,7 +2,7 @@
 import './App.css'
 import {BrowserRouter,Routes,Route} from "react-router-dom"
 import Hero from './components/Hero'
-import Create from './components/Create'
+import CreateUpdate from './components/CreateUpdate'
 
 function App() {
 
@@ -11,7 +11,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Hero/>} />
-        <Route path='/create' element={<Create/>} />
+        <Route path='/:operation' element={<CreateUpdate/>} />
+        <Route path='/:operation/:id' element={<CreateUpdate/>} />
       </Routes>
     </BrowserRouter>
     </>
