@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import FixedNav from "./FixedNav";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios"
  
  export default function Feed() {
 
-    const [isVisible, setIsVisible] = useState(false);
     const [thought,setThought] = useState()
     const [deleted,setDeleted] = useState(false)
 
@@ -41,8 +40,8 @@ import axios from "axios"
    return (
     <>
     <FixedNav/>
-    <div id="feed" className="flex flex-col justify-center items-center h-full bg-slate-100 p-10">
-     <h1 className="self-center p-10 text-5xl font-bold">Feed</h1>
+    <div id="feed" className="flex flex-col justify-center items-center h-full bg-slate-100 lg:p-10 p-8">
+     <h1 className="self-center lg:p-4 text-5xl font-bold">Feed</h1>
             {thought && thought.map(thought => {
                     return(
                     <>
@@ -62,32 +61,18 @@ import axios from "axios"
                                 <p>Likes</p>
                                 <p>comments</p>
                             </div>
-                            <Link to={`/update/${thought._id}`}>
+                            {/* <Link to={`/update/${thought._id}`}>
                                 <button className="border-2 p-2 m-2 rounded-md bg-blue-400 hover:bg-blue-500 text-white">
                                     Update
                                 </button>
                             </Link>
-                            <button onClick={() => handleDelete(thought._id)} className="border-2 border-blue-500 bg-blue-50 hover:bg-white p-2 rounded-md">Delete</button>
+                            <button onClick={() => handleDelete(thought._id)} className="border-2 border-blue-500 bg-blue-50 hover:bg-white p-2 rounded-md">Delete</button> */}
                         </div>
                     </div>
                     </> 
                     )
             })}
     </div>
-    {isVisible ? <div className="hidden lg:flex flex-col items-center border-2 bg-white fixed top-20 right-10 p-10 gap-5 text-white">
-        <p className="text-black text-2xl">New to random Rants?</p>
-        <div className="flex flex-col items-center gap-5">
-            <div className="flex gap-5">
-                <button className="border-2 w-32 py-3 rounded-3xl bg-red-400">Sign Up</button>
-                <button className="border-2 w-32 py-3 rounded-3xl bg-red-400">Log In</button>
-            </div>
-            <div>
-                <Link to="/create">
-                    <button className="border-2 w-32 py-3 rounded-3xl bg-red-400">Add thought</button>
-                </Link>
-            </div>
-        </div>
-    </div>: null}
     </>
    )
  }

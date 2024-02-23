@@ -19,7 +19,7 @@ export default function Hero() {
             <div className="flex flex-col gap-10 justify-center items-center text-center lg:text-left lg:items-start px-8 py-32 font-poppins bg-banner bg-cover bg-[35%] lg:bg-none h-[100dvh]">
                 <h1 className="lg:w-[30rem] text-4xl lg:text-6xl font-bold"> <span className="text-transparent bg-clip-text font-bold bg-gradient-to-r from-red-500 via-yellow-500 to-orange-500">Untangle</span> your Random Thoughts.</h1>
                 <p className="text-xl">It can be anything literally from silly or funny to pondering about meaning of life.</p>
-                <Link to="/signup">
+                <Link to="/auth/signup">
                   <button className="p-2 border-2 border-black w-24 font-bold">Sign Up</button>
                 </Link>
             </div>

@@ -8,7 +8,7 @@ export default function Navbar() {
             <Link to="/">
               <li className="font-bold cursor-pointer">Home</li>
             </Link>
-            <Link to="/login">
+            <Link to="/auth/login">
               <li className="font-bold cursor-pointer">Login</li>
             </Link>
         </ul>
