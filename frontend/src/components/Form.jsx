@@ -84,8 +84,11 @@ export default function Form() {
           </button>
             </form>
           ) : form === "signup" ? (
+            <>
+            <h1 className="self-start font-bold text-sky-500 text-4xl">{form.charAt(0).toUpperCase()+form.substring(1)}</h1>
             <form onSubmit={formik.handleSubmit} className="flex flex-col w-full gap-5">
-               <label htmlFor="fullName">Full Name</label>
+                <div className="flex flex-col">
+                    <label htmlFor="fullName">Full Name</label>
                     <input
                         id="fullName"
                         name="fullName"
@@ -94,8 +97,10 @@ export default function Form() {
                         placeholder="Enter Your Full Name"
                         onChange={formik.handleChange}
                         value={formik.values.fullName}
-                    />
-                <label htmlFor="email">Email</label>
+                        />
+                </div>
+                <div className="flex flex-col">
+                    <label htmlFor="email">Email</label>
                     <input
                         id="email"
                         name="email"
@@ -104,8 +109,10 @@ export default function Form() {
                         placeholder="Enter Your Email"
                         onChange={formik.handleChange}
                         value={formik.values.email}
-                    />
-                <label htmlFor="password">Password</label>
+                        />
+                </div>
+                <div className="flex flex-col">
+                    <label htmlFor="password">Password</label>
                     <input
                         id="password"
                         name="password"
@@ -114,16 +121,21 @@ export default function Form() {
                         placeholder="Enter Your Password"
                         onChange={formik.handleChange}
                         value={formik.values.password}
-                    />
+                        />
+                </div>
                 <button
                     type="submit"
                     className="border-2 py-3 my-3 lg:my-10 w-3/4 bg-orange-300 hover:bg-orange-400 rounded-md text-white">
                     Submit
                 </button>
             </form>
+            </>
           ) : (
+            <>
+            <h1 className="self-start font-bold text-sky-500 text-4xl">{form.charAt(0).toUpperCase()+form.substring(1)}</h1>
             <form onSubmit={formik.handleSubmit} className="flex flex-col w-full gap-5">
-              <label htmlFor="username">Username</label>
+                <div className="flex flex-col">
+                    <label htmlFor="username">Username</label>
                     <input
                         id="username"
                         name="fullName"
@@ -132,8 +144,10 @@ export default function Form() {
                         placeholder="Enter Your Username"
                         onChange={formik.handleChange}
                         value={formik.values.fullName}
-                    />
-              <label htmlFor="password">Password</label>
+                        />
+                </div>
+                <div className="flex flex-col">
+                    <label htmlFor="password">Password</label>
                     <input
                         id="password"
                         name="password"
@@ -142,14 +156,16 @@ export default function Form() {
                         placeholder="Enter Your Password"
                         onChange={formik.handleChange}
                         value={formik.values.password}
-                    />
+                        />
+                </div>
               <button
             type="submit"
-            className="border-2 py-3 my-3 lg:my-10 w-3/4 bg-orange-300 hover:bg-orange-400 rounded-md text-white"
-          >
+            className="border-2 py-3 my-3 lg:my-10 w-3/4 bg-orange-400 lg:bg-orange-300 hover:bg-orange-400 rounded-md text-white"
+            >
             Submit
           </button>
             </form>
+          </>
           )}
           
         </div>
