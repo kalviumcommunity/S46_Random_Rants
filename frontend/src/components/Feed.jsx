@@ -11,7 +11,7 @@ import axios from "axios"
 
     useEffect(() => {
 
-        axios.get("http://localhost:3000/thought")
+        axios.get("https://random-rants.onrender.com/thought/get")
             .then(res=>{
                 setThought(res.data)
                 setDeleted(false)
@@ -29,7 +29,7 @@ import axios from "axios"
     }, [deleted]);
 
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:3000/thought/remove/${id}`)
+        axios.delete(`https://random-rants.onrender.com/thought/remove/${id}`)
             .then(res => {
                 console.log(res)
                 setDeleted(true)

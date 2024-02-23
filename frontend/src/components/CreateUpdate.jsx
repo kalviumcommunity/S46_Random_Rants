@@ -17,14 +17,14 @@ export default function Create() {
         initialValues,
         onSubmit: (values) => {
         if(operation === "create"){
-            axios.post("http://localhost:3000/thought/create",values)
+            axios.post("https://random-rants.onrender.com/thought/create",values)
               .then(res => {
                 console.log(res)
                 navigate("/")
               })
               .catch(err => console.error(err))
           }else{
-            axios.put(`http://localhost:3000/thought/update/${id}`,values)
+            axios.put(`https://random-rants.onrender.com/thought/update/${id}`,values)
                 .then(res => {
                     console.log(res)
                     navigate("/")
