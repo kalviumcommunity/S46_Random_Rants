@@ -1,6 +1,7 @@
-import { Formik, useFormik } from "formik";
+import { useFormik } from "formik";
 import banner from "../assets/banner.jpg";
 import Navbar from "./Navbar";
+import axios from "axios"
 import { useParams,useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 
@@ -11,7 +12,7 @@ export default function Form() {
     const { form } = useParams();
 
     const initialValues = {
-      fullName: "",
+      username: "",
       email: "",
       password: ""
     }; 
@@ -28,7 +29,7 @@ export default function Form() {
   }
 
   const deleteCookie = (cookieName) => {
-    setCookie(cookieName,null,null)
+    setCookie(cookieName,null,0)
   }
 
   const getCookie = (cookieName) => {
@@ -47,10 +48,22 @@ export default function Form() {
 
   const formik = useFormik({
     initialValues,
-    onSubmit: (values) => {
-        const {fullName,email,password} = values
-        setCookie("username",fullName,7)
-        navigate("/feed")
+    onSubmit: (values,) => {
+        if(form == "signup"){
+            axios.post("http://localhost:3000/auth/signup",values)
+                .then(res => {
+                    navigate("/auth/login")
+                })
+                .catch(err => console.error(err))
+            }else{
+                axios.post("http://localhost:3000/auth/login",values)
+                .then(res=>{
+                    setCookie("token",res.data.accessToken,1)
+                    setCookie("email",res.data.email,1)
+                    navigate("/feed")
+            })
+                .catch(err=>console.error(err))
+        }
     },
   });
 
@@ -88,15 +101,15 @@ export default function Form() {
             <h1 className="self-start font-bold text-sky-500 text-4xl">{form.charAt(0).toUpperCase()+form.substring(1)}</h1>
             <form onSubmit={formik.handleSubmit} className="flex flex-col w-full gap-5">
                 <div className="flex flex-col">
-                    <label htmlFor="fullName">Full Name</label>
+                    <label htmlFor="username">Full Name</label>
                     <input
-                        id="fullName"
-                        name="fullName"
+                        id="username"
+                        name="username"
                         type="text"
                         className="border-2 py-2 px-2 w-3/4 rounded-md"
                         placeholder="Enter Your Full Name"
                         onChange={formik.handleChange}
-                        value={formik.values.fullName}
+                        value={formik.values.username}
                         />
                 </div>
                 <div className="flex flex-col">
@@ -135,15 +148,15 @@ export default function Form() {
             <h1 className="self-start font-bold text-sky-500 text-4xl">{form.charAt(0).toUpperCase()+form.substring(1)}</h1>
             <form onSubmit={formik.handleSubmit} className="flex flex-col w-full gap-5">
                 <div className="flex flex-col">
-                    <label htmlFor="username">Username</label>
+                    <label htmlFor="email">Email</label>
                     <input
-                        id="username"
-                        name="fullName"
-                        type="text"
+                        id="email"
+                        name="email"
+                        type="email"
                         className="border-2 py-2 px-2 w-3/4 rounded-md"
-                        placeholder="Enter Your Username"
+                        placeholder="Enter Your Email"
                         onChange={formik.handleChange}
-                        value={formik.values.fullName}
+                        value={formik.values.email}
                         />
                 </div>
                 <div className="flex flex-col">
