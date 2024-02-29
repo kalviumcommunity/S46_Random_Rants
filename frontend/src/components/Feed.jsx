@@ -17,15 +17,7 @@ import axios from "axios"
             })
             .catch(err=>console.log(err))
 
-        const handleScroll = () => {
-            const scrollPosition = window.scrollY;
-            setIsVisible(scrollPosition >= window.innerHeight);
-        };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => window.removeEventListener('scroll', handleScroll);
-    }, [deleted]);
+        }, [deleted]);
 
     const handleDelete = (id) => {
         axios.delete(`https://random-rants.onrender.com/thought/remove/${id}`)
@@ -45,7 +37,7 @@ import axios from "axios"
             {thought && thought.map(thought => {
                     return(
                     <>
-                    <div key={thought._id} className="border-2 w-[20rem] lg:w-[25rem] min-h-[15rem] my-2 rounded-md p-10 bg-white">
+                    <div key={thought._id} className="border-2 w-[18rem] lg:w-[25rem] min-h-[15rem] my-2 rounded-md p-10 bg-white">
                         <div className="flex py-4">
                             <img className="rounded-3xl border-2 size-10" src="" alt="user profile photo" />
                             <div className="px-2">
@@ -61,12 +53,6 @@ import axios from "axios"
                                 <p>Likes</p>
                                 <p>comments</p>
                             </div>
-                            {/* <Link to={`/update/${thought._id}`}>
-                                <button className="border-2 p-2 m-2 rounded-md bg-blue-400 hover:bg-blue-500 text-white">
-                                    Update
-                                </button>
-                            </Link>
-                            <button onClick={() => handleDelete(thought._id)} className="border-2 border-blue-500 bg-blue-50 hover:bg-white p-2 rounded-md">Delete</button> */}
                         </div>
                     </div>
                     </> 
