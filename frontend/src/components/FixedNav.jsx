@@ -22,7 +22,6 @@ export default function FixedNav(){
 
     axios.get(`${API_URI}/auth/logout`)
         .then(res =>  {
-            console.log(res)
             deleteCookie("token")
             deleteCookie("email")
             navigate("/")

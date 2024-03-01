@@ -72,8 +72,6 @@ export default function Form() {
     },
   });
 
-  console.log(formik.errors)
-
   return (
     <div className="flex lg:h-[100dvh]">
       <Toaster richColors/>  

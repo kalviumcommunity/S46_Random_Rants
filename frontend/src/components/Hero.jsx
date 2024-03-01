@@ -15,8 +15,6 @@ export default function Hero() {
     const cArray = cDecoded.split("; ")
     let result;
 
-    console.log(import.meta.env.VITE_API_URI)
-
     cArray.forEach(cookie => {
         if(cookie.indexOf(cookieName) == 0){
             result = cookie.substring(cookieName.length + 1)
