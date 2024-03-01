@@ -91,7 +91,7 @@ import { Toaster,toast } from "sonner";
         <FixedNav/>
         {!isLoading ? <div id="feed" className="flex flex-col justify-center items-center w-full min-h-[100dvh] bg-slate-100 lg:p-12 p-20">
             {isProfile ? null:<h1 className="self-center text-4xl lg:text-5xl font-bold lg:pt-28 pt-5 pb-5">Feed</h1>}
-            {loggedIn && <select id="users" className="p-2 border-2 self-end my-5" onChange={filterThoughts}>
+            {loggedIn && <select id="users" className="p-2 border-2 self-end my-5 hidden lg:block" onChange={filterThoughts}>
                 <option value="All">All</option>
                 {data && data.map(user => (
                     <option className="py-5" key={user._id} value={user._id}>{user.username}</option>
@@ -112,12 +112,6 @@ import { Toaster,toast } from "sonner";
                         <p className="py-2"><span className="text-2xl absolute translate-x-[-0.7rem]">"</span>{thought.thought}<span className="text-2xl absolute">"</span></p>
                         <p className="py-3">#{thought.tag}</p>
                         <hr />
-                        <div className="flex gap-5 items-center justify-between">
-                            <div className="flex gap-5 ">
-                                <p>Likes</p>
-                                <p>comments</p>
-                            </div>
-                        </div>
                     </div>
                     </> 
                 )
@@ -125,11 +119,11 @@ import { Toaster,toast } from "sonner";
         </div> : <Loading/> }
         {loggedIn && getCookie("token") && <div className="flex fixed lg:gap-5 lg:top-40 lg:left-20 bottom-0 p-3 bg-white w-full justify-evenly lg:w-12 lg:flex-col lg:justify-normal lg:bg-slate-100 lg:h-10">
             <div onClick={() => setProfile(false)} className="flex gap-2 items-center cursor-pointer">
-                <img src={home} className="h-8 lg:h-6" alt="" />
+                <img src={home} className={`h-12 lg:h-6 ${!isProfile ? "bg-slate-300" : ""} p-2 lg:p-0 lg:rounded-none lg:bg-neutral-50 rounded-full`} alt="" />
                 <p className="hidden lg:block text-xl font-medium">Home</p>
             </div>
             <div onClick={() => setProfile(true)} className="flex flex-col lg:flex-row gap-2 items-center cursor-pointer">
-                <img src={profile} className="h-8 lg:h-6" alt="" />
+                <img src={profile} className={`h-12 lg:h-6 ${isProfile ? "bg-slate-300" : ""} p-2 lg:p-0 lg:rounded-none lg:bg-neutral-50 rounded-full`} alt="" />
                 <p className="hidden lg:block text-xl font-medium">Profile</p>
             </div>
         </div>}

@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { Toaster,toast } from "sonner"
-
+import Loading from "./Loading"
 
 export default function User() {
 
@@ -69,7 +69,7 @@ export default function User() {
                 setDeleted(true)
             })
             .catch(err => {
-                if (err.response && err.response.data && err.response.data.error) {
+                if (err.response.data.error) {
                     console.error(err.response.data.error);
                     toast.error(err.response.data.error);
                 }else {
@@ -80,11 +80,12 @@ export default function User() {
 
 
   return (
-    <div>
+    <>
+    {userData ? <div>
         <Toaster richColors/>
         <div className="flex flex-col items-center p-5">
-            <img id="profile-pic" className="bg-slate-300 rounded-full size-36" src="" alt="pfp"/>
-                {userData && <h1 className="text-3xl text-center w-full font-medium p-5">{userData.username}</h1>}
+            <img id="profile-pic" className="bg-slate-300 rounded-full size-36" src={`https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=${userData.username}`} alt="pfp"/>
+                <h1 className="text-3xl text-center w-full font-medium p-5">{userData.username}</h1>
             </div>
             <div className="flex flex-col items-center gap-5">
                 {thoughtData && thoughtData.map((thought) => (
@@ -105,10 +106,11 @@ export default function User() {
                     </div>
                 ) )
             }
-            {userData && <Link to={`/create/${userData._id}`}>
+            <Link to={`/create/${userData._id}`}>
                 <button className="bg-blue-500 text-white p-2 font-medium"> + Add thought</button>
-            </Link>}
+            </Link>
             </div>
-    </div>
+    </div> : <Loading/>}
+    </>
   )
 }
