@@ -2,14 +2,37 @@ import banner from "../assets/banner.jpg"
 import arrow from "../assets/arrow-down.png"
 import Navbar from "./Navbar"
 import Feed from "./Feed"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 
 export default function Hero() {
+
+  const navigate = useNavigate()
+
+  const getCookie = (cookieName) => {
+
+    const cDecoded = decodeURIComponent(document.cookie)
+    const cArray = cDecoded.split("; ")
+    let result;
+
+    cArray.forEach(cookie => {
+        if(cookie.indexOf(cookieName) == 0){
+            result = cookie.substring(cookieName.length + 1)
+        }
+    })
+
+    return result
+}
 
   const handleScroll = () => {
     document.getElementById("feed").scrollIntoView({behavior:"smooth"})
   }
-  
+
+  useEffect(() => {
+    if(getCookie("token")){
+      navigate("/feed")
+    }
+  })
 
   return (
     <>
