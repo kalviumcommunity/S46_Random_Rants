@@ -5,11 +5,12 @@ const Validator = (schema) => (payload) =>
 
 
 const thoughtSchema = Joi.object({
-    tag:Joi.string().required(),
+    userId: Joi.string().min(24).required(),
+    tag:Joi.string().min(2).required(),
     thought:Joi.string().required()
 })
 
-const regex = new RegExp('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.\-_*])([a-zA-Z0-9@#$%^&+=*.\-_]){3,}$')
+const regex = new RegExp('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.\-_*])([a-zA-Z0-9@#$%^&+=*.\-_]){6,}$')
 
 const userSchema = Joi.object({
     username:Joi.string().required(),

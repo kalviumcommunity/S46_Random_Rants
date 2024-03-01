@@ -27,7 +27,7 @@ function authenticateToken (req,res,next) {
 }
 
 function generateAccessToken(payload){
-    const token = jwt.sign(payload,process.env.ACCESS_TOKEN,{expiresIn: "20m"})
+    const token = jwt.sign(payload,process.env.ACCESS_TOKEN,{expiresIn: "1d"})
     return token
 }
 
@@ -78,16 +78,17 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post("/post",authenticateToken, async (req,res) => {
+router.post("/post/:id",authenticateToken, async (req,res) => {
 
-    const {error,value} = validateThought(req.body)
+    const userId = req.params.id
+    const {error,value} = validateThought({userId,...req.body})
 
         if(error){
             console.log(error)
             res.send(error.details)
         }else{
             try{
-                const items = new thoughtModel(req.body)
+                const items = new thoughtModel({userId,...req.body})
                 await items.save()
                 res.status(201).json(items)
             }catch(err) {
@@ -99,6 +100,68 @@ router.post("/post",authenticateToken, async (req,res) => {
 
 router.get("/logout", async (req,res) => {
     res.send({message: "logout successful"})
+})
+
+router.get("/user/:email", authenticateToken, async (req,res) => {
+    try{
+        const itemId = req.params.email
+        const items = await userModel.findOne({email: itemId})
+        res.json(items)
+    }catch(err) {
+        console.error(err)
+        res.status(500).json({error:"Error fetching items",err})
+    }
+})
+
+router.get("/posts/:id", authenticateToken, async (req,res) => {
+
+    try{
+        const itemId = req.params.id
+        const items = await thoughtModel.find({userId: itemId})
+        res.json(items)
+    }catch(err) {
+        console.error(err)
+        res.status(500).json({error:"Error fetching items",err})
+    }
+
+})
+
+router.put("/update/:id",authenticateToken,async (req,res) => {
+    
+    const {error,value} = validateThought({userId: req.params.id,...req.body})
+
+        if(error){
+            console.log(error)
+            res.send(error.details)
+        }else{
+            try{
+                const itemId = req.params.id
+                const updatedItem = await thoughtModel.findOneAndUpdate({userId: itemId},req.body,{new:true})
+                if(!updatedItem){
+                    return res.status(404).json({message: "Item not found"})
+                }
+                res.json(updatedItem)
+            } catch(err) {
+                console.error(err)
+                res.status(500).json({error: "Error  updating item", err})
+            }
+        }
+})
+
+router.delete("/delete/:id", authenticateToken, async (req,res) => {
+
+    try {
+        const itemId = req.params.id
+        const deletedItem = await thoughtModel.findByIdAndDelete(itemId)
+        if(!deletedItem){
+            return res.status(404).json({message:"Item not found"})
+        }
+        res.json({message:"Item deleted successfully"})
+    } catch(err){
+        console.error(err)
+        res.status(500).json({message: "Error deleting"})
+    }
+
 })
 
 module.exports = router;
