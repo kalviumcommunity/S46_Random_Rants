@@ -44,7 +44,7 @@ export default function User() {
               });
               setThoughtData(thoughtResponse.data);
             } catch (err) {
-                if (err.response && err.response.data && err.response.data.error) {
+                if (err.response.data.error) {
                     console.error(err.response.data.error);
                     toast.error(err.response.data.error);
                 }else {

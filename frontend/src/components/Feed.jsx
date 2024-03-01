@@ -43,7 +43,14 @@ import { Toaster,toast } from "sonner";
                 setFilteredThoughts(res.data)
                 setLoading(false)
             })
-            .catch(err=>console.log(err))
+            .catch(err=>{
+                if (err.response.data.error) {
+                    console.error(err.response.data.error);
+                    toast.error(err.response.data.error);
+                }else {
+                    toast.error("An error occurred. Please try again.");
+                }
+            })
 
         if(getCookie("token")){
             setLoggedIn(true)
@@ -56,7 +63,7 @@ import { Toaster,toast } from "sonner";
                 setData(res.data)
             })
             .catch(err => {
-                if (err.response && err.response.data && err.response.data.error) {
+                if (err.response.data.error) {
                     console.error(err.response.data.error);
                     toast.error(err.response.data.error);
                 }else {
