@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import Navbar from "./Navbar";
 import axios from "axios";
 import { useNavigate,useParams } from "react-router";
+import {Toaster,toast} from "sonner"
 
 const initialValues = {
     thought: "",
@@ -42,7 +43,14 @@ export default function Create() {
                 console.log(res)
                 navigate("/feed")
               })
-              .catch(err => console.error(err))
+              .catch(err => {
+                if (err.response && err.response.data && err.response.data.error) {
+                    console.error(err.response.data.error);
+                    toast.error(err.response.data.error);
+                }else {
+                    toast.error("An error occurred. Please try again.");
+                }
+              })
           }else{
             axios.put(`${API_URI}/auth/update/${id}`,values,{
                 headers: {
@@ -53,7 +61,14 @@ export default function Create() {
                     console.log(res)
                     navigate("/feed")
                 })
-                .catch(err => console.error(err))
+                .catch(err => {
+                    if (err.response && err.response.data && err.response.data.error) {
+                        console.error(err.response.data.error);
+                        toast.error(err.response.data.error);
+                    }else {
+                        toast.error("An error occurred. Please try again.");
+                    }
+                })
             }
         }
       });
@@ -61,6 +76,7 @@ export default function Create() {
 
     return (
         <>
+        <Toaster richColors/>
         <Navbar/>
         <div className="flex flex-col lg:justify-center lg:items-center w-[100dvw] ">
             <form onSubmit={formik.handleSubmit} className="flex flex-col ml-24 w-1/2 gap-5 lg:translate-x-[12%] mt-20">

@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { Toaster,toast } from "sonner"
 
 
 export default function User() {
@@ -43,7 +44,12 @@ export default function User() {
               });
               setThoughtData(thoughtResponse.data);
             } catch (err) {
-              console.error(err);
+                if (err.response && err.response.data && err.response.data.error) {
+                    console.error(err.response.data.error);
+                    toast.error(err.response.data.error);
+                }else {
+                    toast.error("An error occurred. Please try again.");
+                }
             }
           };
         
@@ -62,12 +68,20 @@ export default function User() {
                 console.log(res)
                 setDeleted(true)
             })
-            .catch(err => console.error(err))
+            .catch(err => {
+                if (err.response && err.response.data && err.response.data.error) {
+                    console.error(err.response.data.error);
+                    toast.error(err.response.data.error);
+                }else {
+                    toast.error("An error occurred. Please try again.");
+                }
+            })
     }
 
 
   return (
     <div>
+        <Toaster richColors/>
         <div className="flex flex-col items-center p-5">
             <img id="profile-pic" className="bg-slate-300 rounded-full size-36" src="" alt="pfp"/>
                 {userData && <h1 className="text-3xl text-center w-full font-medium p-5">{userData.username}</h1>}

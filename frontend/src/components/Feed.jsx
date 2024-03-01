@@ -6,6 +6,7 @@ import axios from "axios"
 import User from "./User";
 import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
+import { Toaster,toast } from "sonner";
  
  export default function Feed() {
 
@@ -54,7 +55,14 @@ import { useNavigate } from "react-router-dom";
             .then(res => {
                 setData(res.data)
             })
-            .catch(err => console.error(err))
+            .catch(err => {
+                if (err.response && err.response.data && err.response.data.error) {
+                    console.error(err.response.data.error);
+                    toast.error(err.response.data.error);
+                }else {
+                    toast.error("An error occurred. Please try again.");
+                }
+            })
 
     }, []);
 
@@ -70,7 +78,8 @@ import { useNavigate } from "react-router-dom";
     }
 
    return (
-    <>
+    <>  
+        <Toaster richColors/>
         <FixedNav/>
         {!isLoading ? <div id="feed" className="flex flex-col justify-center items-center w-full min-h-[100dvh] bg-slate-100 lg:p-12 p-20">
             {isProfile ? null:<h1 className="self-center text-4xl lg:text-5xl font-bold lg:pt-28 pt-5 pb-5">Feed</h1>}

@@ -5,6 +5,7 @@ import axios from "axios"
 import { useParams,useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import * as Yup from "yup"
+import { Toaster,toast } from "sonner";
 
 
 export default function Form() {
@@ -60,7 +61,14 @@ export default function Form() {
             navigate("/feed");
           }
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+            if (err.response && err.response.data && err.response.data.error) {
+                console.error(err.response.data.error);
+                toast.error(err.response.data.error);
+            }else {
+                toast.error("An error occurred. Please try again.");
+            }
+        });
     },
   });
 
@@ -68,6 +76,7 @@ export default function Form() {
 
   return (
     <div className="flex lg:h-[100dvh]">
+      <Toaster richColors/>  
       <div className="w-[100dvw] lg:w-[50dvw]">
         <Navbar />
         <div className="flex flex-col gap-10 justify-center items-center ml-[20%] font-poppins bg-cover bg-[35%] lg:bg-none h-[90dvh]">
