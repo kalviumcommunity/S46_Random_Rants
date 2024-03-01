@@ -4,8 +4,8 @@ import axios from "axios";
 import { useNavigate,useParams } from "react-router";
 
 const initialValues = {
-    tag: "",
     thought: "",
+    tag: "",
   };
 
 export default function Create() {
@@ -13,21 +13,45 @@ export default function Create() {
     const navigate = useNavigate()
     const {operation,id} = useParams()
 
+    const API_URI = import.meta.env.VITE_API_URI
+
+    const getCookie = (cookieName) => {
+        const cDecoded = decodeURIComponent(document.cookie)
+        const cArray = cDecoded.split("; ")
+        let result;
+    
+        cArray.forEach(cookie => {
+            if(cookie.indexOf(cookieName) == 0){
+                result = cookie.substring(cookieName.length + 1)
+            }
+        })
+    
+        return result
+      }
+
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
         if(operation === "create"){
-            axios.post("https://random-rants.onrender.com/thought/create",values)
+            axios.post(`${API_URI}/auth/post/${id}`,values,{
+                headers: {
+                    Authorization: `Bearer ${getCookie("token")}`
+                }
+            })
               .then(res => {
                 console.log(res)
-                navigate("/")
+                navigate("/feed")
               })
               .catch(err => console.error(err))
           }else{
-            axios.put(`https://random-rants.onrender.com/thought/update/${id}`,values)
+            axios.put(`${API_URI}/auth/update/${id}`,values,{
+                headers: {
+                    Authorization: `Bearer ${getCookie("token")}`
+                }
+            })
                 .then(res => {
                     console.log(res)
-                    navigate("/")
+                    navigate("/feed")
                 })
                 .catch(err => console.error(err))
             }
