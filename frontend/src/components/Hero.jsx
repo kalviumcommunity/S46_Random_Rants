@@ -50,7 +50,7 @@ export default function Hero() {
         <div>
             <img className="h-screen w-[80dvw] hidden lg:block" src={banner} alt="image of thoughts being untangled" />
         </div>
-        <img src={arrow} onClick={handleScroll} className="hidden lg:block absolute bottom-2 size-20 left-[47%] cursor-pointer animate-bounce" alt="arrow-down" />
+        <img src={arrow} onClick={handleScroll} className="lg:block absolute bottom-2 size-20 left-[9.5rem] lg:left-[47%] cursor-pointer animate-bounce" alt="arrow-down" />
     </div>
     <Feed/>
     </>

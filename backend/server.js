@@ -8,7 +8,7 @@ const app = express()
 let connectionStatus = "disconnected"
 app.use(express.json())
 app.use(cors({
-    origin: "https://main--randomrants.netlify.app/",
+    origin: "https://randomrants.netlify.app",
     credentials: true
 }))
 

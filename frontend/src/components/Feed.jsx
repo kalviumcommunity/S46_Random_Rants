@@ -63,6 +63,7 @@ import { Toaster,toast } from "sonner";
                 setData(res.data)
             })
             .catch(err => {
+                console.error(err)
                 if (err.response.data.error) {
                     console.error(err.response.data.error);
                     toast.error(err.response.data.error);
