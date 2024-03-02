@@ -8,16 +8,5 @@ Let's see how much the mind can babble.
 
 ### Find your people among the babbling minds
 
-Create a space to share random thoughts about a topic.
+Share any random thought you have!
 
-### Upvote the madness
-
-Let your voice be heard! You can upvote any random thought you like.
-
-### Anonymous
-
-Express yourself freely without revealing your identity. Your username? Pure random gibberish, of course!
-
-Deployed Link[Front-end]: https://randomrants.netlify.app
-
-Deployed Link[Back-end]: https://random-rants.onrender.com
