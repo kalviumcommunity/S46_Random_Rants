@@ -10,3 +10,6 @@ Let's see how much the mind can babble.
 
 Share any random thought you have!
 
+Deployed Link[Front-End]: https://randomrants.netlify.app
+
+Deployed Link[Back-End]: https://random-rants.onrender.com
