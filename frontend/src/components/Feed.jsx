@@ -82,6 +82,7 @@ import { Toaster,toast } from "sonner";
                 return thought.userId === e.target.value
             }
         })
+        
         setFilteredThoughts(filteredThoughts)
     }
 
@@ -101,13 +102,20 @@ import { Toaster,toast } from "sonner";
             filteredThoughts && filteredThoughts.length > 0 ? filteredThoughts.map(thought => {
                 return(
                     <>
-                    <div key={thought._id} className="border-2 w-[18rem] lg:w-[23rem] min-h-[15rem] my-2 rounded-md p-10 bg-white">
-                        <div className="flex py-2">
-                            <img className="rounded-3xl border-2 size-10" src="" alt="user profile photo" />
-                            <div className="px-2">
-                                <p>Username</p>
-                                <p>{new Date().toDateString()}</p>
-                            </div>
+                    <div key={thought._id} className="flex flex-col border-2 w-[18rem] lg:w-[23rem] min-h-[15rem] my-2 rounded-md p-10 bg-white">
+                        <div className="flex py-2 items-center">
+                                {data && data.map(user => {
+                                    if(user._id == thought.userId){
+                                        return (
+                                            <>
+                                        <img className="rounded-3xl border-2 size-10" src={`https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=${user.username}`} alt="user profile photo" />
+                                        <div className="px-2">
+                                            <p>{user.username}</p>
+                                         </div>
+                                        </>
+                                       )
+                                    }
+                                })}
                         </div>
                         <p className="py-2"><span className="text-2xl absolute translate-x-[-0.7rem]">"</span>{thought.thought}<span className="text-2xl absolute">"</span></p>
                         <p className="py-3">#{thought.tag}</p>
